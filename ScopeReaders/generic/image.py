@@ -25,7 +25,7 @@ else:
 
 class ImageReader(Reader):
     """
-    Translates data from an image file to an HDF5 file
+    Translates data from an image file to sidpy.Dataset
     """
 
     def __init__(self, *args, **kwargs):
