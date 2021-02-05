@@ -166,7 +166,6 @@ class DM3Reader(sidpy.Reader):
 
     """
     file_path: filepath to dm3 file.
-    """
     def __init__(self, file_path, verbose=False):
         super().__init__(file_path)
 
