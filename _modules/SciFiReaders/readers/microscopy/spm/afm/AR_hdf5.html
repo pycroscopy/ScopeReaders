@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SciFiReaders.readers.microscopy.spm.afm.AR_hdf5 &mdash; SciFiReaders 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="../../../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../../index.html" class="icon icon-home"> SciFiReaders
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">SciFiReaders</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../about.html">SciFiReaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../available_readers.html">Available Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contact.html">Contact us</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/00_developing_a_reader/index.html">Creating a Reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/01_using_readers/index.html">Using Readers</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">SciFiReaders</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SciFiReaders.readers.microscopy.spm.afm.AR_hdf5</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SciFiReaders.readers.microscopy.spm.afm.AR_hdf5</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Wed Dec 07 16:04:34 2016</span>
+
+<span class="sd">Updated on Fri Sep 11 15:22:00 2020 for ScopeReader</span>
+
+<span class="sd">@author: Suhas Somnath, Chris R. Smith, Raj Giridhargopal, Rama Vasudevan</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># For array operations</span>
+<span class="kn">import</span> <span class="nn">sidpy</span> <span class="k">as</span> <span class="nn">sid</span>
+<span class="kn">from</span> <span class="nn">sidpy.sid</span> <span class="kn">import</span> <span class="n">Reader</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
+
+<span class="c1"># Reader Information</span>
+<span class="c1"># ----------------------</span>
+<span class="n">reader_name</span> <span class="o">=</span> <span class="s1">&#39;ARHDF5&#39;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Asylum Research HDF5 file typically used for storing spatial maps of force-distance curves&#39;</span>
+
+<div class="viewcode-block" id="ARhdf5Reader"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.html#SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader">[docs]</a><span class="k">class</span> <span class="nc">ARhdf5Reader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts data and metadata from ARhdf5 files</span>
+<span class="sd">    These are Asylum Research files typically captured for</span>
+<span class="sd">    force maps from their microscopes.</span>
+<span class="sd">    The ARhdf5 file should be generated with the converter provided</span>
+<span class="sd">    by Asylum Research called ARDFtoHDF5. Contact David Aue &lt;David.Aue@oxinst.com&gt;</span>
+<span class="sd">    or Tommaso Costanzo &lt;tommaso.costanzo01@gmail.com&gt; to get a</span>
+<span class="sd">    copy of the converter. NOTE: the AR converter works only under</span>
+<span class="sd">    windows.</span>
+
+<span class="sd">    NOTE: At this point, the z dimension vector is not correctly captured</span>
+<span class="sd">    Not immediately clear how to fix it. TODO: Check with Asylum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ARhdf5Reader.read"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.html#SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the file given in file_path into a sidpy dataset</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        verbose : Boolean (Optional)</span>
+<span class="sd">            Whether or not to show  print statements for debugging</span>
+<span class="sd">        debug : Boolean (Optional)</span>
+<span class="sd">            Whether or not to print log statements</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sidpy.Dataset : List of sidpy.Dataset objects.</span>
+<span class="sd">            Multi-channel inputs are separated into individual dataset objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_file_path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segments_name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channels_name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points_per_sec</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+        <span class="c1"># Open the datafile</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data_filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="n">ARh5_file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">data_filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unable to open the file&#39;</span><span class="p">,</span> <span class="n">data_filepath</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="c1"># Get info from the origin file like Notes and Segments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">ARh5_file</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Note&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;Segments&#39;</span><span class="p">]</span>
+        <span class="n">segments_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Segments&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segments_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">segments_name</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;Segments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;Segments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">channels_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Channels&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channels_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">channels_name</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">points_per_sec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;ARDoIVPointsPerSec&#39;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">points_per_sec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;NumPtsPerSec&#39;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Map size [X, Y]: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Channels names: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channels_name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name of Segments:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments_name</span><span class="p">)</span>
+
+        <span class="c1"># Only the extension &#39;Ext&#39; segment can change size</span>
+        <span class="c1"># so we get the shortest one and we trim all the others</span>
+
+        <span class="n">extension_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments_name</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;Ext&#39;</span><span class="p">)</span>
+        <span class="n">short_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">extension_idx</span><span class="p">]))</span>
+        <span class="n">longest_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">extension_idx</span><span class="p">]))</span>
+        <span class="n">difference</span> <span class="o">=</span> <span class="n">longest_ext</span> <span class="o">-</span> <span class="n">short_ext</span>  <span class="c1"># this is a difference between integers</span>
+        <span class="n">tot_length</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span> <span class="o">-</span> <span class="n">difference</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># +1 otherwise array(tot_length) will be of 1 position shorter</span>
+        <span class="n">points_trimmed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">extension_idx</span><span class="p">])</span> <span class="o">-</span> <span class="n">short_ext</span>
+
+        <span class="c1"># Open the output hdf5 file</span>
+        <span class="n">x_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;FastScanSize&#39;</span><span class="p">)),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span>
+        <span class="n">y_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;FastScanSize&#39;</span><span class="p">)),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])</span>
+        <span class="n">z_dim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tot_length</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points_per_sec</span><span class="p">)</span>
+
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#list of sidpy datasets</span>
+
+        <span class="c1">#Let&#39;s get all the metadata</span>
+        <span class="c1"># Create the new segments that will be stored as attribute</span>
+        <span class="n">new_segments</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">seg</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments_name</span><span class="p">):</span>
+            <span class="n">new_segments</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">seg</span><span class="p">]</span> <span class="o">-</span> <span class="n">short_ext</span><span class="p">})</span>
+
+        <span class="n">seg_metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Segments&#39;</span><span class="p">:</span> <span class="n">new_segments</span><span class="p">,</span>
+                                           <span class="s1">&#39;Points_trimmed&#39;</span><span class="p">:</span> <span class="n">points_trimmed</span><span class="p">,</span>
+                                           <span class="s1">&#39;Notes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">}</span>
+        <span class="n">general_metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;translator&#39;</span><span class="p">:</span> <span class="s1">&#39;ARhdf5&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;instrument&#39;</span><span class="p">:</span> <span class="s1">&#39;Asylum Research &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;MicroscopeModel&#39;</span><span class="p">),</span>
+                            <span class="s1">&#39;AR sftware version&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">note_value</span><span class="p">(</span><span class="s1">&#39;Version&#39;</span><span class="p">)}</span>
+
+        <span class="n">combined_metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;segments&#39;</span><span class="p">:</span> <span class="n">seg_metadata</span><span class="p">,</span> <span class="s1">&#39;general&#39;</span><span class="p">:</span> <span class="n">general_metadata</span><span class="p">})</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channels_name</span><span class="p">):</span>
+            <span class="n">main_dset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="n">tot_length</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map_size</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]):</span>
+                    <span class="n">AR_pos_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="n">seg_start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">extension_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">short_ext</span>
+                    <span class="n">main_dset</span><span class="p">[</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="n">AR_pos_string</span><span class="p">][</span><span class="n">index</span><span class="p">,</span> <span class="n">seg_start</span><span class="p">:]</span>
+
+            <span class="n">quant_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_def_unit</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+
+            <span class="n">data_set</span> <span class="o">=</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">main_dset</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">data_type</span> <span class="o">=</span> <span class="n">sid</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">SPECTRAL_IMAGE</span>
+
+            <span class="c1"># Add quantity and units</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">quant_unit</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="n">channel</span>
+
+            <span class="c1"># Add dimension info</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">x_dim</span><span class="p">,</span>
+                                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                                                    <span class="n">units</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                                                    <span class="n">dimension_type</span><span class="o">=</span><span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">y_dim</span><span class="p">,</span>
+                                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                                                    <span class="n">units</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                                                    <span class="n">dimension_type</span><span class="o">=</span><span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">z_dim</span><span class="p">,</span>
+                                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span>
+                                                    <span class="n">units</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span>
+                                                    <span class="n">dimension_type</span><span class="o">=</span><span class="s1">&#39;spectral&#39;</span><span class="p">))</span>
+
+            <span class="c1"># append metadata</span>
+            <span class="n">chan_metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+            <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">chan_metadata</span><span class="p">,</span> <span class="o">**</span><span class="n">combined_metadata</span><span class="p">}</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">new_dict</span>
+
+            <span class="c1"># Finally, append it</span>
+            <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">image</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;Image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">main_dset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;Image&#39;</span><span class="p">][</span><span class="n">image</span><span class="p">])</span>
+
+            <span class="n">quant_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_def_unit</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+            <span class="n">data_set</span> <span class="o">=</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">main_dset</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">data_type</span> <span class="o">=</span> <span class="n">sid</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">IMAGE</span>
+
+            <span class="c1"># Add quantity and units</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">quant_unit</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="n">channel</span>
+
+            <span class="c1"># Add dimension info</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">x_dim</span><span class="p">,</span>
+                                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                                                    <span class="n">units</span><span class="o">=</span><span class="n">quant_unit</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                                                    <span class="n">dimension_type</span><span class="o">=</span><span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">y_dim</span><span class="p">,</span>
+                                                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                                                    <span class="n">units</span><span class="o">=</span><span class="n">quant_unit</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                                                    <span class="n">dimension_type</span><span class="o">=</span><span class="s1">&#39;spatial&#39;</span><span class="p">))</span>
+
+            <span class="c1"># append metadata</span>
+            <span class="n">chan_metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ARh5_file</span><span class="p">[</span><span class="s1">&#39;Image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+            <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">chan_metadata</span><span class="p">,</span> <span class="o">**</span><span class="n">combined_metadata</span><span class="p">}</span>
+            <span class="n">data_set</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">new_dict</span>
+
+            <span class="c1"># Finally, append it</span>
+            <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+
+        <span class="c1"># Return the dataset</span>
+        <span class="k">return</span> <span class="n">datasets</span></div>
+
+<div class="viewcode-block" id="ARhdf5Reader.can_read"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.html#SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.can_read">[docs]</a>    <span class="k">def</span> <span class="nf">can_read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests whether or not the provided file has a .ibw extension</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_file_path</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;h5&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">h5_f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="s1">&#39;ForceMap&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">h5_f</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h5_f</span><span class="p">[</span><span class="s1">&#39;ForceMap&#39;</span><span class="p">],</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="ARhdf5Reader.note_value"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.html#SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.note_value">[docs]</a>    <span class="k">def</span> <span class="nf">note_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the value of a single note entry with name &quot;name&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------------</span>
+<span class="sd">        name : String / unicode</span>
+<span class="sd">            Name of the parameter to get teh value</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------------</span>
+<span class="sd">        value : String / unicode</span>
+<span class="sd">            Value of the Note entry requested.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;:\s+(.+$)&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;:+(.+$)&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="p">):</span>
+            <span class="n">matched</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matched</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># We do not expect to enter here</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING! Multiple value matched! </span><span class="se">\n</span><span class="s1"> Only the first is returned&#39;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;Note entry with name &quot;</span><span class="si">{}</span><span class="s1">&quot; not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ARhdf5Reader.get_def_unit"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.html#SciFiReaders.readers.microscopy.spm.afm.AR_hdf5.ARhdf5Reader.get_def_unit">[docs]</a>    <span class="k">def</span> <span class="nf">get_def_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrive the default unit from the channel name</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan_name : string</span>
+<span class="sd">            Name of the channel to get the unit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        default_unit : string</span>
+<span class="sd">            Default unit of that channel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Check if chan_name is string</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chan_name</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;The channel name must be of type string&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Find the default unit</span>
+        <span class="k">if</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Phas&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;deg&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Curr&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Freq&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;Hz&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Bias&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;V&#39;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Amp&#39;</span><span class="p">)</span> <span class="ow">or</span>
+              <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Raw&#39;</span><span class="p">)</span> <span class="ow">or</span>
+              <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;ZSnsr&#39;</span><span class="p">)</span> <span class="ow">or</span>
+              <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Defl&#39;</span><span class="p">)</span> <span class="ow">or</span>
+              <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;MapHeight&#39;</span><span class="p">)):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Seconds&#39;</span><span class="p">)</span> <span class="ow">or</span>
+              <span class="n">chan_name</span> <span class="o">==</span> <span class="s1">&#39;TriggerTime&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;HeaterTemperature&#39;</span><span class="p">):</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;Celsius&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span> <span class="o">==</span> <span class="s1">&#39;MapAdhesion&#39;</span><span class="p">:</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;N/m^2&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span> <span class="o">==</span> <span class="s1">&#39;HeaterHumidity&#39;</span><span class="p">:</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;g/m^3&#39;</span>
+        <span class="k">elif</span> <span class="n">chan_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;LVDT&#39;</span><span class="p">):</span>
+            <span class="c1"># This should be the laser virtual deflection</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unknown unit for channel: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chan_name</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit set to &quot;unknown&quot;&#39;</span><span class="p">)</span>
+            <span class="n">default_unit</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+
+        <span class="k">return</span> <span class="n">default_unit</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Pycroscopy contributors.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+SciFiReaders.readers.microscopy.spm.afm.igor\_ibw
+=================================================
+
+.. automodule:: SciFiReaders.readers.microscopy.spm.afm.igor_ibw
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+      :nosignatures:
+   
+      IgorIBWReader
+   
+   
+
+   
+   
+   
+
+
+

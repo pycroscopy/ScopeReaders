@@ -1,0 +1,31 @@
+﻿SciFiReaders
+============
+
+.. automodule:: SciFiReaders
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.ingestor
+   SciFiReaders.readers
+

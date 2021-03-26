@@ -1,0 +1,31 @@
+SciFiReaders.readers.microscopy.spm.stm
+=======================================
+
+.. automodule:: SciFiReaders.readers.microscopy.spm.stm
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.readers.microscopy.spm.stm.nanonis_dat
+   SciFiReaders.readers.microscopy.spm.stm.omicron_asc
+

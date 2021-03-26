@@ -1,0 +1,31 @@
+SciFiReaders.readers.SID
+========================
+
+.. automodule:: SciFiReaders.readers.SID
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.readers.SID.Nsid_reader
+   SciFiReaders.readers.SID.Usid_reader
+

@@ -1,0 +1,35 @@
+SciFiReaders.readers.microscopy.em.tem.nion\_reader
+===================================================
+
+.. automodule:: SciFiReaders.readers.microscopy.em.tem.nion_reader
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      parse_zip
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      NionReader
+   
+   
+
+   
+   
+   
+
+
+

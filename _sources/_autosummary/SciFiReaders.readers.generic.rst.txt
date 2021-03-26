@@ -1,0 +1,30 @@
+SciFiReaders.readers.generic
+============================
+
+.. automodule:: SciFiReaders.readers.generic
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.readers.generic.image
+

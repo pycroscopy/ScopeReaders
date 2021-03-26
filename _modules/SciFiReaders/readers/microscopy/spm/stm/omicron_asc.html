@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SciFiReaders.readers.microscopy.spm.stm.omicron_asc &mdash; SciFiReaders 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="../../../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../../index.html" class="icon icon-home"> SciFiReaders
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">SciFiReaders</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../about.html">SciFiReaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../available_readers.html">Available Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contact.html">Contact us</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/00_developing_a_reader/index.html">Creating a Reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notebooks/01_using_readers/index.html">Using Readers</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">SciFiReaders</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SciFiReaders.readers.microscopy.spm.stm.omicron_asc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SciFiReaders.readers.microscopy.spm.stm.omicron_asc</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Fri Jan 22 15:48:34 2020</span>
+
+<span class="sd">@author: Suhas Somnath, Sudhajit Misra, Rama Vasudevan</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  <span class="c1"># For array operations</span>
+<span class="kn">import</span> <span class="nn">sidpy</span> <span class="k">as</span> <span class="nn">sid</span>
+<span class="kn">from</span> <span class="nn">sidpy.sid</span> <span class="kn">import</span> <span class="n">Reader</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
+
+<div class="viewcode-block" id="AscReader"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader.html#SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader">[docs]</a><span class="k">class</span> <span class="nc">AscReader</span><span class="p">(</span><span class="n">Reader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads Scanning Tunnelling Spectroscopy (STS) data in .asc files obtained from Omicron STMs.</span>
+<span class="sd">    These are actually compatible with Nanonis controllers for Omicron microscopes,</span>
+<span class="sd">    It seems they are probably NOT compatible with matrix controller outputs.</span>
+<span class="sd">    See the group discussion at https://groups.google.com/g/pycroscopy/c/d7lcGnlPFpo/m/UEysliC8CAAJ</span>
+
+<span class="sd">    TODO: At this point this AscReader does not appear to work for non-Z spec files. Needs to be fixed!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AscReader.read"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader.html#SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">parm_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the file given in file_path into a sidpy dataset</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        verbose : Boolean (Optional)</span>
+<span class="sd">            Whether or not to show  print statements for debugging</span>
+<span class="sd">        parm_encoding : str, optional</span>
+<span class="sd">            Codec to be used to decode the bytestrings into Python strings if</span>
+<span class="sd">            needed. Default &#39;utf-8&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sidpy.Dataset : List of sidpy.Dataset objects.</span>
+<span class="sd">            Multi-channel inputs are separated into individual dataset objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_file_path</span>
+        <span class="n">folder_path</span><span class="p">,</span> <span class="n">file_name</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+
+        <span class="c1"># Extracting the raw data into memory</span>
+        <span class="n">file_handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">string_lines</span> <span class="o">=</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">file_handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># Extract parameters from the first few header lines</span>
+        <span class="n">parm_dict</span><span class="p">,</span> <span class="n">num_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_parms</span><span class="p">(</span><span class="n">string_lines</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">parm_dict</span><span class="p">)</span>
+        <span class="n">num_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-y_pixels&#39;</span><span class="p">])</span>
+        <span class="n">num_cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-x_pixels&#39;</span><span class="p">])</span>
+        <span class="n">num_pos</span> <span class="o">=</span> <span class="n">num_rows</span> <span class="o">*</span> <span class="n">num_cols</span>
+        <span class="n">spectra_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-z_points&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Extract the STS data from subsequent lines</span>
+        <span class="n">raw_data_2d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_data</span><span class="p">(</span><span class="n">string_lines</span><span class="p">,</span> <span class="n">num_pos</span><span class="p">,</span> <span class="n">spectra_length</span><span class="p">,</span> <span class="n">num_headers</span><span class="p">)</span>
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">raw_data_2d</span><span class="p">,</span> <span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">,</span> <span class="n">spectra_length</span><span class="p">))</span>
+
+        <span class="c1"># Generate the x / voltage / spectroscopic axis:</span>
+        <span class="n">volt_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Spectroscopy-Device_1_Start [Volt]&#39;</span><span class="p">],</span>
+                               <span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Spectroscopy-Device_1_End [Volt]&#39;</span><span class="p">],</span>
+                               <span class="n">spectra_length</span><span class="p">)</span>
+
+        <span class="c1"># Build row, column vectors</span>
+        <span class="n">xvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-x_length&#39;</span><span class="p">],</span> <span class="n">num_cols</span><span class="p">)</span>
+        <span class="n">yvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-y_length&#39;</span><span class="p">],</span> <span class="n">num_rows</span><span class="p">)</span>
+
+        <span class="c1"># now write it to the sidpy dataset object</span>
+        <span class="n">data_set</span> <span class="o">=</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Omicron_STS&#39;</span><span class="p">)</span>
+        <span class="n">data_set</span><span class="o">.</span><span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;spectral_image&#39;</span>
+
+        <span class="c1"># Add quantity and units</span>
+        <span class="n">data_set</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-value_unit&#39;</span><span class="p">]</span>
+        <span class="n">data_set</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="s1">&#39;Current&#39;</span>
+
+        <span class="c1"># Add dimension info</span>
+        <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">xvec</span><span class="p">,</span>
+                                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                                                <span class="n">units</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span>
+                                                <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;position&#39;</span><span class="p">,</span>
+                                                <span class="n">dimension_type</span><span class="o">=</span><span class="n">sid</span><span class="o">.</span><span class="n">DimensionType</span><span class="o">.</span><span class="n">SPATIAL</span><span class="p">))</span>
+
+        <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">yvec</span><span class="p">,</span>
+                                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                                                <span class="n">units</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span>
+                                                <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;position&#39;</span><span class="p">,</span>
+                                                <span class="n">dimension_type</span><span class="o">=</span><span class="n">sid</span><span class="o">.</span><span class="n">DimensionType</span><span class="o">.</span><span class="n">SPATIAL</span><span class="p">))</span>
+
+        <span class="n">data_set</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sid</span><span class="o">.</span><span class="n">Dimension</span><span class="p">(</span><span class="n">volt_vec</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;I&#39;</span><span class="p">,</span>
+                                                <span class="n">units</span><span class="o">=</span><span class="n">parm_dict</span><span class="p">[</span><span class="s1">&#39;Main-value_unit&#39;</span><span class="p">],</span> <span class="n">quantity</span><span class="o">=</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span>
+                                                <span class="n">dimension_type</span><span class="o">=</span><span class="n">sid</span><span class="o">.</span><span class="n">DimensionType</span><span class="o">.</span><span class="n">SPECTRAL</span><span class="p">))</span>
+
+        <span class="c1"># append metadata</span>
+        <span class="n">data_set</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="n">parm_dict</span>
+
+        <span class="c1"># Return the sidy dataset</span>
+        <span class="k">return</span> <span class="n">data_set</span></div>
+
+    <span class="k">def</span> <span class="nf">_read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string_lines</span><span class="p">,</span> <span class="n">num_pos</span><span class="p">,</span> <span class="n">spectra_length</span><span class="p">,</span> <span class="n">num_headers</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the data from lines of the data file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        string_lines : :class:`list` of str</span>
+<span class="sd">            Lines containing the data in string format, separated by tabs</span>
+<span class="sd">        num_pos : unsigned int</span>
+<span class="sd">            Number of pixels</span>
+<span class="sd">        spectra_length : unsigned int</span>
+<span class="sd">            Number of points in the spectral / voltage axis</span>
+<span class="sd">        num_headers : unsigned int</span>
+<span class="sd">            Number of header lines to ignore</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        raw_data_2d : 2D numpy array</span>
+<span class="sd">            Data arranged as [position x voltage points]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">raw_data_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_pos</span><span class="p">,</span> <span class="n">spectra_length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line_ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_pos</span><span class="p">):</span>
+            <span class="n">this_line</span> <span class="o">=</span> <span class="n">string_lines</span><span class="p">[</span><span class="n">num_headers</span> <span class="o">+</span> <span class="n">line_ind</span><span class="p">]</span>
+            <span class="n">string_spectrum</span> <span class="o">=</span> <span class="n">this_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># omitting the new line</span>
+            <span class="n">raw_data_2d</span><span class="p">[</span><span class="n">line_ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">string_spectrum</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">raw_data_2d</span>
+
+    <span class="k">def</span> <span class="nf">_parse_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_path</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_read_parms</span><span class="p">(</span><span class="n">string_lines</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the parameters regarding the experiment as dictionary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        string_lines : list of strings</span>
+<span class="sd">            Lines from the data file in string representation</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        parm_dict : dictionary</span>
+<span class="sd">            Dictionary of parameters regarding the experiment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Reading parameters stored in the first few rows of the file</span>
+
+        <span class="k">def</span> <span class="nf">parse_header</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="c1"># &quot;.  Aux2_V:&quot;</span>
+            <span class="n">match_obj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\.  (.*):&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="n">type_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">match_obj</span><span class="p">:</span>
+                <span class="n">raw_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">type_caster</span><span class="p">(</span><span class="n">match_obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">type_caster</span> <span class="ow">in</span>
+                            <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_list</span><span class="p">)),</span> <span class="n">type_list</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">parse_parm</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="c1"># &quot;.  .  Auto_Flush_Period = 0.1 Second&quot;</span>
+            <span class="n">match_obj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\.  \.  (.*) = (.*)&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+            <span class="n">type_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">match_obj</span><span class="p">:</span>
+                <span class="n">raw_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">type_caster</span><span class="p">(</span><span class="n">match_obj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">type_caster</span> <span class="ow">in</span>
+                            <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_list</span><span class="p">)),</span> <span class="n">type_list</span><span class="p">)]</span>
+
+                <span class="c1"># Some cleaning:</span>
+                <span class="n">raw_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># We use &#39;-&#39; as a level separator</span>
+                <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+                <span class="c1"># often, units are on the values side, see if these can be transitioned over to the key:</span>
+                <span class="n">vals_split</span> <span class="o">=</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals_split</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">raw_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">raw_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; [&#39;</span> <span class="o">+</span> <span class="n">vals_split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="n">vals_split</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="c1"># convert those values that should be integers:</span>
+                    <span class="k">if</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">raw_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">raw_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">flatten_dict</span><span class="p">(</span><span class="n">nested_dict</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">):</span>
+            <span class="c1"># From: https://codereview.stackexchange.com/questions/21033/flatten-dictionary-in-python-functional-style</span>
+            <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="n">outer_key</span><span class="p">,</span> <span class="n">outer_value</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outer_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="p">[(</span><span class="n">outer_key</span> <span class="o">+</span> <span class="n">separator</span> <span class="o">+</span> <span class="n">inner_key</span><span class="p">,</span> <span class="n">inner_value</span><span class="p">)</span> <span class="k">for</span> <span class="n">inner_key</span><span class="p">,</span> <span class="n">inner_value</span> <span class="ow">in</span> <span class="n">flatten_dict</span><span class="p">(</span><span class="n">outer_value</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">[(</span><span class="n">outer_key</span><span class="p">,</span> <span class="n">outer_value</span><span class="p">)]</span>
+
+            <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">outer_key</span><span class="p">,</span> <span class="n">outer_value</span> <span class="ow">in</span> <span class="n">nested_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">expand</span><span class="p">(</span><span class="n">outer_key</span><span class="p">,</span> <span class="n">outer_value</span><span class="p">)]</span>
+
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+        <span class="c1"># #############################################################################################################</span>
+
+        <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="n">line</span> <span class="o">=</span> <span class="n">string_lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;# Created by SPIP&#39;</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;# Created by SPIP &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">temp_dict</span><span class="p">[</span><span class="s1">&#39;SPIP_version&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">ind</span><span class="p">]</span>
+            <span class="n">temp_dict</span><span class="p">[</span><span class="s1">&#39;creation_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># #################################################################################################</span>
+
+        <span class="n">line_offset</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="k">for</span> <span class="n">line_ind</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">string_lines</span><span class="p">[</span><span class="n">line_offset</span><span class="p">:]):</span>
+            <span class="k">if</span> <span class="n">parse_header</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">line_offset</span> <span class="o">+=</span> <span class="n">line_ind</span>
+                <span class="k">break</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;# &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">test</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">test</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+                    <span class="c1"># convert those values that should be integers:</span>
+                    <span class="k">if</span> <span class="n">test</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">test</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+            <span class="n">temp_dict</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">test</span>
+
+        <span class="n">main_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Main&#39;</span><span class="p">:</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()}</span>
+
+        <span class="c1"># #################################################################################################</span>
+
+        <span class="n">curr_cat_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">string_lines</span><span class="p">[</span><span class="n">line_offset</span><span class="p">:]):</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;# Start of Data:&#39;</span><span class="p">):</span>
+                <span class="n">line_offset</span> <span class="o">+=</span> <span class="n">ind</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">break</span>
+            <span class="n">header_name</span> <span class="o">=</span> <span class="n">parse_header</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">header_name</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">curr_cat_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">main_dict</span><span class="p">[</span><span class="n">curr_cat_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">temp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                <span class="n">curr_cat_name</span> <span class="o">=</span> <span class="n">header_name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">this_parm</span> <span class="o">=</span> <span class="n">parse_parm</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">this_parm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">temp_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">this_parm</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_dict</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">main_dict</span><span class="p">[</span><span class="n">curr_cat_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># #################################################################################################</span>
+
+        <span class="k">return</span> <span class="n">flatten_dict</span><span class="p">(</span><span class="n">main_dict</span><span class="p">),</span> <span class="n">line_offset</span>
+
+<div class="viewcode-block" id="AscReader.can_read"><a class="viewcode-back" href="../../../../../../_autosummary/SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader.html#SciFiReaders.readers.microscopy.spm.stm.omicron_asc.AscReader.can_read">[docs]</a>    <span class="k">def</span> <span class="nf">can_read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests whether or not the provided file has a .asc extension</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AscReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">can_read</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="s1">&#39;asc&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Pycroscopy contributors.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

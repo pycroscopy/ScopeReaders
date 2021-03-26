@@ -1,0 +1,31 @@
+SciFiReaders.readers.microscopy.spm
+===================================
+
+.. automodule:: SciFiReaders.readers.microscopy.spm
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.readers.microscopy.spm.afm
+   SciFiReaders.readers.microscopy.spm.stm
+

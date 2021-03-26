@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SciFiReaders.readers.SID.Nsid_reader &mdash; SciFiReaders 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> SciFiReaders
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">SciFiReaders</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../about.html">SciFiReaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../available_readers.html">Available Readers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contact.html">Contact us</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/00_developing_a_reader/index.html">Creating a Reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_using_readers/index.html">Using Readers</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">SciFiReaders</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>SciFiReaders.readers.SID.Nsid_reader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for SciFiReaders.readers.SID.Nsid_reader</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Reader capable of reading one or all NSID datasets present in a given HDF5 file</span>
+
+<span class="sd">Created on Fri May 22 16:29:25 2020</span>
+
+<span class="sd">@author: Gerd Duscher, Suhas Somnath, Maxim Ziadtinov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">import</span> <span class="nn">sidpy</span>
+<span class="kn">from</span> <span class="nn">pyNSID.io.hdf_utils</span> <span class="kn">import</span> <span class="n">check_if_main</span><span class="p">,</span> <span class="n">get_all_main</span><span class="p">,</span> <span class="n">read_h5py_dataset</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="NSIDReader"><a class="viewcode-back" href="../../../../_autosummary/SciFiReaders.readers.SID.Nsid_reader.NSIDReader.html#SciFiReaders.readers.SID.Nsid_reader.NSIDReader">[docs]</a><span class="k">class</span> <span class="nc">NSIDReader</span><span class="p">(</span><span class="n">sidpy</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance of NSIDReader which can read one or more HDF5</span>
+<span class="sd">        datasets formatted according to NSID into sidpy.Dataset objects</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_path : str, h5py.File, or h5py.Group</span>
+<span class="sd">            Path to a HDF5 file or a handle to an open HDF5 file or group</span>
+<span class="sd">            object</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Please consider using the ``self._h5_file`` object to get handles to</span>
+<span class="sd">        specific datasets or sub-trees that need to be read instead of opening</span>
+<span class="sd">        the file again outside the context of this Reader.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;This Reader will eventually be moved to the ScopeReaders package&#39;</span>
+             <span class="s1">&#39;. Be prepared to change your import statements&#39;</span><span class="p">,</span>
+             <span class="ne">FutureWarning</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">NSIDReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+        <span class="c1"># Let h5py raise an OS error if a non-HDF5 file was provided</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h5_file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_dsets</span> <span class="o">=</span> <span class="n">get_all_main</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_h5_file</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># DO NOT close HDF5 file. Dask array will fail if you do so.</span>
+
+<div class="viewcode-block" id="NSIDReader.can_read"><a class="viewcode-back" href="../../../../_autosummary/SciFiReaders.readers.SID.Nsid_reader.NSIDReader.html#SciFiReaders.readers.SID.Nsid_reader.NSIDReader.can_read">[docs]</a>    <span class="k">def</span> <span class="nf">can_read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether or not this Reader can read the provided file</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool :</span>
+<span class="sd">            True if this Reader can read the provided file and if this file</span>
+<span class="sd">            contains at least one NSID-formatted main dataset. Else, False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_dsets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="NSIDReader.read"><a class="viewcode-back" href="../../../../_autosummary/SciFiReaders.readers.SID.Nsid_reader.NSIDReader.html#SciFiReaders.readers.SID.Nsid_reader.NSIDReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h5_object</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads all available NSID main datasets or the specified h5_object</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        h5_object : h5py.Dataset or h5py.Group</span>
+<span class="sd">            HDF5 Dataset to read or the HDF5 group under which to read all</span>
+<span class="sd">            datasets</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sidpy.Dataset or list of sidpy.Dataset objects</span>
+<span class="sd">            Datasets present in the provided file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">h5_object</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h5_object</span><span class="p">,</span> <span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Provided h5_object was not a h5py.Dataset or &#39;</span>
+                            <span class="s1">&#39;h5py.Group object but was of type: </span><span class="si">{}</span><span class="s1">&#39;</span>
+                            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">h5_object</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__validate_obj_in_same_file</span><span class="p">(</span><span class="n">h5_object</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h5_object</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">read_h5py_dataset</span><span class="p">(</span><span class="n">h5_object</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">h5_object</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__validate_obj_in_same_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h5_object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal function that ensures that the provided HDF5 object is within</span>
+<span class="sd">        the same file as that provided in __init__</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        h5_object : h5py.Dataset, h5py.Group</span>
+<span class="sd">            HDF5 object</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        OSError - if the provded object is in a different HDF5 file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">h5_object</span><span class="o">.</span><span class="n">file</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h5_file</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s1">&#39;The file containing the provided h5_object: </span><span class="si">{}</span><span class="s1"> is &#39;</span>
+                          <span class="s1">&#39;not the same as provided HDF5 file when &#39;</span>
+                          <span class="s1">&#39;instantiating this object: </span><span class="si">{}</span><span class="s1">&#39;</span>
+                          <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h5_object</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">_h5_file</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+
+<div class="viewcode-block" id="NSIDReader.read_all"><a class="viewcode-back" href="../../../../_autosummary/SciFiReaders.readers.SID.Nsid_reader.NSIDReader.html#SciFiReaders.readers.SID.Nsid_reader.NSIDReader.read_all">[docs]</a>    <span class="k">def</span> <span class="nf">read_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads all HDF5 datasets formatted according to NSID specifications.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        recursive : bool, default = True</span>
+<span class="sd">            We might just remove this kwarg</span>
+<span class="sd">        parent : h5py.Group, Default = None</span>
+<span class="sd">            HDF5 group under which to read all available datasets.</span>
+<span class="sd">            By default, all datasets within the HDF5 file are read.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sidpy.Dataset or list of sidpy.Dataset objects</span>
+<span class="sd">            Datasets present in the provided file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">h5_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h5_file</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;parent should be a h5py.Group object&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__validate_obj_in_same_file</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+            <span class="n">h5_group</span> <span class="o">=</span> <span class="n">parent</span>
+
+        <span class="k">if</span> <span class="n">recursive</span><span class="p">:</span>
+            <span class="n">list_of_main</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_dsets</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">list_of_main</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">h5_group</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h5_group</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">check_if_main</span><span class="p">(</span><span class="n">h5_group</span><span class="p">[</span><span class="n">key</span><span class="p">]):</span>
+                        <span class="n">list_of_main</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h5_group</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="c1"># Go through each of the identified</span>
+        <span class="n">list_of_datasets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dset</span> <span class="ow">in</span> <span class="n">list_of_main</span><span class="p">:</span>
+            <span class="n">list_of_datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_h5py_dataset</span><span class="p">(</span><span class="n">dset</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">list_of_datasets</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Pycroscopy contributors.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

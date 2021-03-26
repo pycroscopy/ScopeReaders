@@ -1,0 +1,31 @@
+SciFiReaders.readers.microscopy.spm.afm
+=======================================
+
+.. automodule:: SciFiReaders.readers.microscopy.spm.afm
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. autosummary::
+   :toctree:
+      :template: custom-module-template.rst
+   :recursive:
+
+   SciFiReaders.readers.microscopy.spm.afm.AR_hdf5
+   SciFiReaders.readers.microscopy.spm.afm.igor_ibw
+
